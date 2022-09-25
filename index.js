@@ -1,4 +1,6 @@
-//console.log(`testing testing 123`)
+console.log(`testing testing 123`);
 
-import ".components/counter-element.js";
- import ".components/lit-counter-elemet.js";
+import "./components/counter-element.js";
+import "./components/lit-counter-element.js";
+import "./components/todo-appy.js";
+import "./components/td-counter.js"

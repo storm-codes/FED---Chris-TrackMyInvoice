@@ -5,12 +5,12 @@ import {
 
 class LitCounter extends LitElement {
   static properties = {
-    count: { type: Number, state: true },
+    count: { type: Number },
     label: { type: String },
   };
 
   render() {
-    return html`<div>$(label): $(count)</div>`;
+    return html`<div>${this.label}: ${this.count}</div>`;
   }
 }
 
