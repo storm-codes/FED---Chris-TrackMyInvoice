@@ -1,76 +1,69 @@
-//console.log(`testing testing 123`);
-
-//import "./components/counter-element.js";
-//import "./components/lit-counter-element.js";
-//import "./components/todo-appy.js";
-//import "./components/td-counter.js";
-
-//start of API//
-
 const EPISODE_PREVIEW_FRAGMENT = `
-fragment EpisodePreview on Episode {
-  id
-  date: publisedAt
-  title
-  image {
-    url
+  fragment EpisodePreview on Episode {
+      id
+      date: publishedAt
+      title
+      image {
+        url
+      }
   }
-}`;
+`
 
-const EPISODE_PAGE_QUERY = `
-query {
-  first: episodes(first: 1) {
-    id
-    date: publisedAt
-    title
-    image {
-      url
+const EPISODES_PAGE_QUERY = `
+    query {
+    first: episodes(first: 1) {
+      id
+      title
+      image {
+        url
+      }
+      audio: audioFile {
+        url
+        mime: mimeType
+      }
     }
-    audio: audoFile {
-      url
-      mime: mineType
+
+    previous: episodes(skip: 1) {
+      ...EpisodePreview,
     }
   }
-
-previous: episodes(skip: 1) {
-  ...EpisodePreview,
-}
-}
-
-${EPISODE_PREVIEW_FRAGMENT}
+  
+  ${EPISODE_PREVIEW_FRAGMENT}
 `;
 
 const SINGLE_EPISODE_PAGE_QUERY = `
-query($id: ID) {
-  episode(where: {id: $id}) {
-    number: episodeNumber
-    date: publisedAt
-    DataTransferItemListdescription
-    notes: showNOtes
-    audio:audioFile {
-      url
-      mime: MimeType
-    }
-    image {
-      url
-    }
-    guests {
-      fullName
-      photo {
+  query($id: ID) {
+    episode(where: { id: $id }) {
+      number: episodeNumber
+      date: publishedAt
+      title
+      description
+      notes: showNotes
+      audio: audioFile {
+        url
+        mime: mimeType
+      }
+      image {
         url
       }
-    }
-    tags {
-      name
-    }
-    sponsors {
-      company{
+      guests {
+        fullName
+        photo {
+          url
+        }
+      }
+      tags {
         name
-        website
+      }
+      sponsors {
+        company {
+          name
+          website
+        }
       }
     }
   }
-}` ;
+`;
 
 const SINGLE_EPISODE_NEIGHBORS_QUERY = `
   query($previous: Int, $next: Int) {
